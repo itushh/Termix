@@ -1,5 +1,5 @@
 interface OverviewTabProps {
-    data: {
+    data?: {
         policy_title: { mention: boolean; value: string };
         policy_type: { mention: boolean; value: string };
         parties_involved: { mention: boolean; insurer: string; policyholder: string; beneficiaries_defined: boolean };
@@ -23,32 +23,70 @@ interface OverviewTabProps {
             documentation_required: string[];
         };
         brief_overview: string;
-    }
+        critical_summary?: string;
+    },
+    streamingSummary?: string;
 }
 
-const OverviewTab = ({ data }: OverviewTabProps) => {
+const Skeleton = ({ className }: { className?: string }) => (
+    <div className={`animate-pulse bg-muted rounded ${className}`} />
+);
+
+const OverviewTab = ({ data, streamingSummary }: OverviewTabProps) => {
+    const summary = data?.critical_summary || streamingSummary;
+
     return (
-        <div className="flex flex-col gap-8 p-6 md:p-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
+        <div className="flex flex-col gap-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
+            {/* Critical Analysis Section */}
+            <div className="bg-primary/5 border border-primary/10 p-8 rounded-4xl relative overflow-hidden group">
+                <div className="flex items-center gap-3 mb-4">
+                    {/* <div className="w-2 h-2 rounded-full bg-primary animate-pulse" /> */}
+                    <h3 className="text-xs font-bold uppercase tracking-widest text-muted-foreground">Summary</h3>
+                </div>
+                {summary ? (
+                    <p className="text-lg font-medium text-foreground leading-relaxed relative z-10 transition-all duration-300">
+                        {summary}
+                        {streamingSummary && !data?.critical_summary && <span className="inline-block w-1.5 h-5 ml-1 bg-primary animate-pulse align-middle" />}
+                    </p>
+                ) : (
+                    <div className="flex flex-col gap-3">
+                        <Skeleton className="h-5 w-full" />
+                        <Skeleton className="h-5 w-[90%]" />
+                        <Skeleton className="h-5 w-[85%]" />
+                    </div>
+                )}
+            </div>
+
             {/* Header Cards */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <div className="md:col-span-2 bg-muted/30 border border-border p-8 rounded-4xl relative overflow-hidden group">
-                    {/* <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
-                        <svg className="w-24 h-24" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z" />
-                        </svg>
-                    </div> */}
-                    <h3 className="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-4">Policy Summary</h3>
-                    <p className="text-lg font-medium text-foreground leading-relaxed relative z-10">{data.brief_overview}</p>
+                    <h3 className="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-4">Executive Brief</h3>
+                    {data ? (
+                        <p className="text-lg font-medium text-foreground leading-relaxed relative z-10">{data.brief_overview}</p>
+                    ) : (
+                        <div className="flex flex-col gap-3">
+                            <Skeleton className="h-5 w-full" />
+                            <Skeleton className="h-4 w-2/3" />
+                        </div>
+                    )}
                 </div>
                 <div className="bg-muted/30 border border-border p-8 rounded-4xl flex flex-col justify-center gap-6">
                     <div>
                         <div className="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-1">Policy Title</div>
-                        <div className="text-lg font-bold text-foreground truncate">{data.policy_title.value || "N/A"}</div>
+                        {data ? (
+                            <div className="text-lg font-bold text-foreground truncate">{data.policy_title.value || "N/A"}</div>
+                        ) : (
+                            <Skeleton className="h-7 w-3/4 mt-1" />
+                        )}
                     </div>
                     <div className="h-px bg-border w-full" />
                     <div>
                         <div className="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-1">Policy Type</div>
-                        <div className="text-lg font-bold text-foreground">{data.policy_type.value || "N/A"}</div>
+                        {data ? (
+                            <div className="text-lg font-bold text-foreground">{data.policy_type.value || "N/A"}</div>
+                        ) : (
+                            <Skeleton className="h-7 w-1/2 mt-1" />
+                        )}
                     </div>
                 </div>
             </div>
@@ -67,17 +105,29 @@ const OverviewTab = ({ data }: OverviewTabProps) => {
                     <div className="flex flex-col gap-4 text-sm">
                         <div className="flex flex-col justify-between py-2 border-b border-border/50 gap-1">
                             <span className="text-muted-foreground font-medium">Insurer</span>
-                            <span className="text-foreground font-bold">{data.parties_involved.insurer}</span>
+                            {data ? (
+                                <span className="text-foreground font-bold">{data.parties_involved.insurer}</span>
+                            ) : (
+                                <Skeleton className="h-5 w-3/4" />
+                            )}
                         </div>
                         <div className="flex flex-col justify-between py-2 border-b border-border/50 gap-1">
                             <span className="text-muted-foreground font-medium">Policyholder</span>
-                            <span className="text-foreground font-bold">{data.parties_involved.policyholder}</span>
+                            {data ? (
+                                <span className="text-foreground font-bold">{data.parties_involved.policyholder}</span>
+                            ) : (
+                                <Skeleton className="h-5 w-2/3" />
+                            )}
                         </div>
                         <div className="flex justify-between py-2">
                             <span className="text-muted-foreground font-medium">Beneficiaries</span>
-                            <span className={`px-2 py-0.5 rounded text-xs font-bold ${data.parties_involved.beneficiaries_defined ? "bg-green-500/10 text-green-500" : "bg-destructive/10 text-destructive"}`}>
-                                {data.parties_involved.beneficiaries_defined ? "DEFINED" : "UNDEFINED"}
-                            </span>
+                            {data ? (
+                                <span className={`px-2 py-0.5 rounded text-xs font-bold ${data.parties_involved.beneficiaries_defined ? "bg-green-500/10 text-green-500" : "bg-destructive/10 text-destructive"}`}>
+                                    {data.parties_involved.beneficiaries_defined ? "DEFINED" : "UNDEFINED"}
+                                </span>
+                            ) : (
+                                <Skeleton className="h-5 w-20" />
+                            )}
                         </div>
                     </div>
                 </div>
@@ -94,28 +144,41 @@ const OverviewTab = ({ data }: OverviewTabProps) => {
                     <div className="flex flex-col gap-4 text-sm">
                         <div className="flex justify-between items-center">
                             <span className="text-muted-foreground font-medium">Validity</span>
-                            <span className="text-foreground font-bold">{data.period_of_contract.tenure}</span>
+                            {data ? (
+                                <span className="text-foreground font-bold">{data.period_of_contract.tenure}</span>
+                            ) : (
+                                <Skeleton className="h-5 w-24" />
+                            )}
                         </div>
                         <div className="flex flex-col gap-4 p-4 bg-muted/30 rounded-xl">
                             <div className="flex flex-col gap-1">
                                 <span className="text-[10px] font-bold text-muted-foreground uppercase block">Starts</span>
-                                <span className="text-foreground font-bold">{data.period_of_contract.start_date}</span>
+                                {data ? (
+                                    <span className="text-foreground font-bold">{data.period_of_contract.start_date}</span>
+                                ) : (
+                                    <Skeleton className="h-5 w-28" />
+                                )}
                             </div>
                             <div className="flex flex-col gap-1">
                                 <span className="text-[10px] font-bold text-muted-foreground uppercase block">Ends</span>
-                                <span className="text-foreground font-bold">{data.period_of_contract.end_date}</span>
+                                {data ? (
+                                    <span className="text-foreground font-bold">{data.period_of_contract.end_date}</span>
+                                ) : (
+                                    <Skeleton className="h-5 w-28" />
+                                )}
                             </div>
                         </div>
                         <div className="mt-2 pt-2">
                             <div className="flex items-center justify-between">
                                 <span className="text-muted-foreground font-medium">Renewal</span>
-                                <span className={`px-2 py-0.5 rounded text-xs font-bold ${data.period_of_contract.renewable.bool ? "text-green-500 bg-green-500/10" : "bg-destructive/10 text-destructive"}`}>
-                                    {data.period_of_contract.renewable.bool ? "AVAILABLE" : "RESTRICTED"}
-                                </span>
+                                {data ? (
+                                    <span className={`px-2 py-0.5 rounded text-xs font-bold ${data.period_of_contract.renewable.bool ? "text-green-500 bg-green-500/10" : "bg-destructive/10 text-destructive"}`}>
+                                        {data.period_of_contract.renewable.bool ? "AVAILABLE" : "RESTRICTED"}
+                                    </span>
+                                ) : (
+                                    <Skeleton className="h-5 w-20" />
+                                )}
                             </div>
-                            {/* <p className="text-xs text-muted-foreground mt-2 leading-relaxed italic border-l-2 border-primary/20 pl-3">
-                                {data.period_of_contract.renewable.bool ? data.period_of_contract.renewable.wording : data.period_of_contract.renewable.condition}
-                            </p> */}
                         </div>
                     </div>
                 </div>
@@ -132,15 +195,30 @@ const OverviewTab = ({ data }: OverviewTabProps) => {
                     <div className="flex flex-col gap-4 text-sm flex-1">
                         <div className="flex justify-between items-center py-2 border-b border-border/50">
                             <span className="text-muted-foreground font-medium">Frequency</span>
-                            <span className="text-foreground font-bold">{data.installments.frequency}</span>
+                            {data ? (
+                                <span className="text-foreground font-bold">{data.installments.frequency}</span>
+                            ) : (
+                                <Skeleton className="h-5 w-20" />
+                            )}
                         </div>
                         <div className="flex justify-between items-center py-2 border-b border-border/50">
                             <span className="text-muted-foreground font-medium">Grace Period</span>
-                            <span className="text-foreground font-bold">{data.installments.grace_period}</span>
+                            {data ? (
+                                <span className="text-foreground font-bold">{data.installments.grace_period}</span>
+                            ) : (
+                                <Skeleton className="h-5 w-24" />
+                            )}
                         </div>
                         <div className="mt-4 p-4 bg-destructive/5 rounded-xl border border-destructive/10">
                             <span className="text-[10px] font-bold text-destructive uppercase tracking-widest block mb-2">Warning: Failure to Pay</span>
-                            <span className="text-xs text-foreground font-medium leading-relaxed block italic">"{data.installments.consequence_of_lapse}"</span>
+                            {data ? (
+                                <span className="text-xs text-foreground font-medium leading-relaxed block italic">"{data.installments.consequence_of_lapse}"</span>
+                            ) : (
+                                <div className="flex flex-col gap-2">
+                                    <Skeleton className="h-3 w-full" />
+                                    <Skeleton className="h-3 w-4/5" />
+                                </div>
+                            )}
                         </div>
                     </div>
                 </div>
@@ -165,39 +243,54 @@ const OverviewTab = ({ data }: OverviewTabProps) => {
                     <div className="flex flex-col gap-8">
                         <div>
                             <div className="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-4">Notification Window</div>
-                            <div className="inline-block p-4 bg-muted/20 border border-border/30 rounded-xl text-primary font-bold text-md hover:border-primary/30 transition-colors">
-                                {data.ways_to_claim.claim_notification_timeline}
-                            </div>
+                            {data ? (
+                                <div className="inline-block p-4 bg-muted/20 border border-border/30 rounded-xl text-primary font-bold text-md hover:border-primary/30 transition-colors">
+                                    {data.ways_to_claim.claim_notification_timeline}
+                                </div>
+                            ) : (
+                                <Skeleton className="h-14 w-40 rounded-xl" />
+                            )}
                         </div>
                         <div>
                             <div className="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-4">Available Methods</div>
                             <div className="flex flex-col gap-2">
-                                {data.ways_to_claim.methods.map((m, i) => (
-                                    <li key={i} className="flex items-start gap-3 p-3 rounded-xl bg-muted/20 border border-border/30 group hover:border-primary/30 transition-colors">
-                                        <div className="p-1 rounded-full bg-green-500/10 text-green-500 mt-0.5">
-                                            <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
-                                            </svg>
-                                        </div>
-                                        <span className="text-sm text-foreground font-medium group-hover:text-primary transition-colors">{m}</span>
-                                    </li>
-                                ))}
+                                {data ? (
+                                    data.ways_to_claim.methods.map((m, i) => (
+                                        <li key={i} className="flex items-start gap-3 p-3 rounded-xl bg-muted/20 border border-border/30 group hover:border-primary/30 transition-colors">
+                                            <div className="p-1 rounded-full bg-green-500/10 text-green-500 mt-0.5">
+                                                <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+                                                </svg>
+                                            </div>
+                                            <span className="text-sm text-foreground font-medium group-hover:text-primary transition-colors">{m}</span>
+                                        </li>
+                                    ))
+                                ) : (
+                                    <>
+                                        <Skeleton className="h-12 w-full rounded-xl" />
+                                        <Skeleton className="h-12 w-full rounded-xl" />
+                                    </>
+                                )}
                             </div>
                         </div>
                     </div>
                     <div>
                         <div className="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-4">Required Documentation</div>
                         <ul className="grid grid-cols-1 gap-3 m-0 p-0 list-none">
-                            {data.ways_to_claim.documentation_required.map((doc, i) => (
-                                <li key={i} className="flex items-start gap-3 p-3 rounded-xl bg-muted/20 border border-border/30 group hover:border-primary/30 transition-colors">
-                                    <div className="p-1 rounded-full bg-green-500/10 text-green-500 mt-0.5">
-                                        <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
-                                        </svg>
-                                    </div>
-                                    <span className="text-sm text-foreground font-medium group-hover:text-primary transition-colors">{doc}</span>
-                                </li>
-                            ))}
+                            {data ? (
+                                data.ways_to_claim.documentation_required.map((doc, i) => (
+                                    <li key={i} className="flex items-start gap-3 p-3 rounded-xl bg-muted/20 border border-border/30 group hover:border-primary/30 transition-colors">
+                                        <div className="p-1 rounded-full bg-green-500/10 text-green-500 mt-0.5">
+                                            <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+                                            </svg>
+                                        </div>
+                                        <span className="text-sm text-foreground font-medium group-hover:text-primary transition-colors">{doc}</span>
+                                    </li>
+                                ))
+                            ) : (
+                                Array(5).fill(0).map((_, i) => <Skeleton key={i} className="h-12 w-full rounded-xl" />)
+                            )}
                         </ul>
                     </div>
                 </div>
@@ -207,3 +300,4 @@ const OverviewTab = ({ data }: OverviewTabProps) => {
 }
 
 export default OverviewTab;
+

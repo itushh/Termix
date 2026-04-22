@@ -23,7 +23,7 @@ interface AmountSharingTabProps {
 
 const AmountSharingTab = ({ data }: AmountSharingTabProps) => {
     return (
-        <div className="flex flex-col gap-8 p-6 md:p-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
+        <div className="flex flex-col gap-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
             {/* Primary Amounts */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="bg-green-500/5 border border-green-500/10 p-8 rounded-4xl flex flex-col gap-4 relative overflow-hidden group shadow-sm">

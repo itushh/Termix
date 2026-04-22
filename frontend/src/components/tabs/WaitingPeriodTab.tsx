@@ -23,7 +23,7 @@ const WaitingPeriodTab = ({ data }: WaitingPeriodTabProps) => {
     }
 
     return (
-        <div className="flex flex-col gap-10 p-6 md:p-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
+        <div className="flex flex-col gap-10 animate-in fade-in slide-in-from-bottom-4 duration-500">
             {/* Max Duration Banner */}
             <div className="bg-primary/5 border border-primary/10 p-10 rounded-[2.5rem] flex flex-col items-center justify-center gap-4 text-center relative overflow-hidden group shadow-sm">
                 <div className="absolute top-0 left-0 w-full h-1 bg-linear-to-r from-transparent via-primary/30 to-transparent" />

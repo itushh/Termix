@@ -3,9 +3,11 @@ import { useState, useRef } from 'react';
 
 interface FileDropAreaProps {
     onAnalysisComplete: (data: any) => void;
+    onSummaryChunk: (chunk: string) => void;
+    onStarted: () => void;
 }
 
-const FileDropArea = ({ onAnalysisComplete }: FileDropAreaProps) => {
+const FileDropArea = ({ onAnalysisComplete, onSummaryChunk, onStarted }: FileDropAreaProps) => {
     const [isDragging, setIsDragging] = useState(false);
     const [isUploading, setIsUploading] = useState(false);
     const [error, setError] = useState<string | null>(null);
@@ -59,14 +61,52 @@ const FileDropArea = ({ onAnalysisComplete }: FileDropAreaProps) => {
                 throw new Error(errData.message || "Failed to analyze document.");
             }
 
-            const data = await response.json();
-            onAnalysisComplete(data);
+            if (!response.body) {
+                throw new Error("Response body is empty");
+            }
+
+            onStarted();
+
+            const reader = response.body.getReader();
+            const decoder = new TextDecoder();
+            let partialData = "";
+
+            while (true) {
+                const { done, value } = await reader.read();
+                if (done) break;
+
+                const chunk = decoder.decode(value, { stream: true });
+                partialData += chunk;
+
+                // Process SSE format: data: {...}\n\n
+                const lines = partialData.split("\n\n");
+                partialData = lines.pop() || ""; // keep the last partial line
+
+                for (const line of lines) {
+                    if (line.startsWith("data: ")) {
+                        const jsonStr = line.replace("data: ", "").trim();
+                        try {
+                            const data = JSON.parse(jsonStr);
+                            if (data.type === "summary") {
+                                onSummaryChunk(data.content);
+                            } else if (data.type === "final") {
+                                onAnalysisComplete(data.content);
+                            } else if (data.type === "error") {
+                                setError(data.content);
+                            }
+                        } catch (e) {
+                            console.error("Error parsing SSE chunk", e);
+                        }
+                    }
+                }
+            }
         } catch (err: any) {
             setError(err.message || "Something went wrong.");
         } finally {
             setIsUploading(false);
         }
     };
+
 
     return (
         <div className="flex-1 flex flex-col gap-5 p-5 md:p-20 w-full text-center">

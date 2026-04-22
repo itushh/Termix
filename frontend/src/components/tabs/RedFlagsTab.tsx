@@ -8,7 +8,7 @@ interface RedFlagsTabProps {
 
 const RedFlagsTab = ({ data }: RedFlagsTabProps) => {
     return (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 p-6 md:p-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
             {/* Non-disclosure */}
             <div className="flex flex-col gap-6">
                 <div className="flex items-center gap-4">

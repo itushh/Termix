@@ -12,7 +12,7 @@ interface LoopholesTabProps {
 
 const LoopholesTab = ({ data }: LoopholesTabProps) => {
     return (
-        <div className="flex flex-col gap-12 p-6 md:p-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
+        <div className="flex flex-col gap-12 animate-in fade-in slide-in-from-bottom-4 duration-500">
             {/* Rejection Triggers */}
             <section className="flex flex-col gap-6">
                 <div className="flex items-center gap-4">

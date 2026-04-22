@@ -29,7 +29,7 @@ const CoverageTab = ({ data }: CoverageTabProps) => {
     const { desease, hospital } = data;
 
     return (
-        <div className="flex flex-col gap-10 p-6 md:p-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
+        <div className="flex flex-col gap-10 animate-in fade-in slide-in-from-bottom-4 duration-500">
             {/* Disease Section */}
             <section className="bg-card border border-border shadow-sm rounded-3xl overflow-hidden">
                 <div className="p-6 border-b border-border bg-muted/10 flex items-center gap-4">
