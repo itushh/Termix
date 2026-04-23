@@ -41,10 +41,8 @@ const OverviewTab = ({ data, streamingSummary }: OverviewTabProps) => {
         <div className="flex flex-col gap-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
             {/* Streamed Summary */}
             <BorderedCard>
-                {/* <div className="bg-primary/5 border border-primary/10 p-8 rounded-4xl relative overflow-hidden group"> */}
                 <div className="p-8 rounded-4xl relative overflow-hidden group bg-card border border-border">
                     <div className="flex items-center gap-3 mb-4">
-                        {/* <div className="w-2 h-2 rounded-full bg-primary animate-pulse" /> */}
                         <h3 className="text-xs font-bold uppercase tracking-widest text-muted-foreground">Summary</h3>
                     </div>
                     {summary ? (
@@ -63,7 +61,7 @@ const OverviewTab = ({ data, streamingSummary }: OverviewTabProps) => {
             </BorderedCard>
 
             {/* Header Cards */}
-            <div className="grid grid-cols-1 md:grid-cols-3">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <BorderedCard className="md:col-span-2">
                     <div className="h-full bg-muted/30 border border-border p-8 rounded-4xl relative overflow-hidden group">
                         <h3 className="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-4">Executive Brief</h3>
@@ -78,7 +76,7 @@ const OverviewTab = ({ data, streamingSummary }: OverviewTabProps) => {
                     </div>
                 </BorderedCard>
                 <BorderedCard>
-                    <div className="h-full bg-muted/30 border border-border p-8 rounded-4xl flex flex-col justify-center gap-6">
+                    <div className="h-full bg-muted/30 border border-border p-8 rounded-4xl flex flex-col justify-center gap-6 text-left">
                         <div>
                             <div className="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-1">Policy Title</div>
                             {data ? (
@@ -101,9 +99,9 @@ const OverviewTab = ({ data, streamingSummary }: OverviewTabProps) => {
             </div>
 
             {/* Parties & Timeline */}
-            <div className="grid grid-cols-1 md:grid-cols-3">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <BorderedCard>
-                    <div className="h-full bg-card border border-border p-6 rounded-2xl shadow-sm">
+                    <div className="h-full bg-card border border-border p-6 rounded-2xl shadow-sm text-left">
                         <div className="flex items-center gap-3 mb-6">
                             <div className="p-2 rounded-lg bg-primary/10 text-primary">
                                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -113,7 +111,7 @@ const OverviewTab = ({ data, streamingSummary }: OverviewTabProps) => {
                             <h4 className="font-bold text-foreground">Stakeholders</h4>
                         </div>
                         <div className="flex flex-col gap-4 text-sm">
-                            <div className="flex flex-col justify-between py-2 border-b border-border/50 gap-1">
+                            <div className="flex flex-col justify-between py-2 border-b border-border/50 gap-1 text-left">
                                 <span className="text-muted-foreground font-medium">Insurer</span>
                                 {data ? (
                                     <span className="text-foreground font-bold">{data.parties_involved.insurer}</span>
@@ -121,7 +119,7 @@ const OverviewTab = ({ data, streamingSummary }: OverviewTabProps) => {
                                     <Skeleton className="h-5 w-3/4" />
                                 )}
                             </div>
-                            <div className="flex flex-col justify-between py-2 border-b border-border/50 gap-1">
+                            <div className="flex flex-col justify-between py-2 border-b border-border/50 gap-1 text-left">
                                 <span className="text-muted-foreground font-medium">Policyholder</span>
                                 {data ? (
                                     <span className="text-foreground font-bold">{data.parties_involved.policyholder}</span>
@@ -144,7 +142,7 @@ const OverviewTab = ({ data, streamingSummary }: OverviewTabProps) => {
                 </BorderedCard>
 
                 <BorderedCard>
-                    <div className="h-full bg-card border border-border p-6 rounded-2xl shadow-sm">
+                    <div className="h-full bg-card border border-border p-6 rounded-2xl shadow-sm text-left">
                         <div className="flex items-center gap-3 mb-6">
                             <div className="p-2 rounded-lg bg-primary/10 text-primary">
                                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -163,7 +161,7 @@ const OverviewTab = ({ data, streamingSummary }: OverviewTabProps) => {
                                 )}
                             </div>
                             <div className="flex flex-col gap-4 p-4 bg-muted/30 rounded-xl">
-                                <div className="flex flex-col gap-1">
+                                <div className="flex flex-col gap-1 text-left">
                                     <span className="text-[10px] font-bold text-muted-foreground uppercase block">Starts</span>
                                     {data ? (
                                         <span className="text-foreground font-bold">{data.period_of_contract.start_date}</span>
@@ -171,7 +169,7 @@ const OverviewTab = ({ data, streamingSummary }: OverviewTabProps) => {
                                         <Skeleton className="h-5 w-28" />
                                     )}
                                 </div>
-                                <div className="flex flex-col gap-1">
+                                <div className="flex flex-col gap-1 text-left">
                                     <span className="text-[10px] font-bold text-muted-foreground uppercase block">Ends</span>
                                     {data ? (
                                         <span className="text-foreground font-bold">{data.period_of_contract.end_date}</span>
@@ -197,7 +195,7 @@ const OverviewTab = ({ data, streamingSummary }: OverviewTabProps) => {
                 </BorderedCard>
 
                 <BorderedCard>
-                    <div className="h-full bg-card border border-border p-6 rounded-2xl shadow-sm flex flex-col">
+                    <div className="h-full bg-card border border-border p-6 rounded-2xl shadow-sm flex flex-col text-left">
                         <div className="flex items-center gap-3 mb-6">
                             <div className="p-2 rounded-lg bg-primary/10 text-primary">
                                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -223,8 +221,8 @@ const OverviewTab = ({ data, streamingSummary }: OverviewTabProps) => {
                                     <Skeleton className="h-5 w-24" />
                                 )}
                             </div>
-                            <div className="mt-4 p-4 bg-destructive/5 rounded-xl border border-destructive/10">
-                                <span className="text-[10px] font-bold text-destructive uppercase tracking-widest block mb-2">Warning: Failure to Pay</span>
+                            <div className="mt-4 p-4 bg-destructive/5 rounded-xl border border-destructive/10 text-left">
+                                <span className="text-[10px] font-bold text-destructive uppercase tracking-widest block mb-1">Warning: Failure to Pay</span>
                                 {data ? (
                                     <span className="text-xs text-foreground font-medium leading-relaxed block italic">"{data.installments.consequence_of_lapse}"</span>
                                 ) : (
@@ -241,7 +239,7 @@ const OverviewTab = ({ data, streamingSummary }: OverviewTabProps) => {
 
             {/* Claims Process */}
             <BorderedCard>
-                <div className="bg-card border border-border rounded-4xl overflow-hidden shadow-sm">
+                <div className="bg-card border border-border rounded-4xl overflow-hidden shadow-sm text-left">
                     <div className="p-6 md:p-8 border-b border-border bg-muted/10">
                         <div className="flex items-center gap-3">
                             <div className="p-3 rounded-xl bg-primary text-primary-foreground shadow-lg shadow-primary/20">
@@ -317,4 +315,3 @@ const OverviewTab = ({ data, streamingSummary }: OverviewTabProps) => {
 }
 
 export default OverviewTab;
-
