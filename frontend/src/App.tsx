@@ -1,14 +1,20 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom"
 import Analyze from "./pages/Analyze"
 import Header from "./components/Header"
+import BorderedCard from "./components/BorderedCard"
 
 const App = () => {
   return (
     <BrowserRouter>
-      <div className="w-315 px-11 fixed left-1/2 top-5 transform -translate-x-1/2 z-50 border-y border-border">
+      {/* <div className="w-315 px-11 fixed left-1/2 top-5 transform -translate-x-1/2 z-50 border-y border-border">
         <Header />
-      </div>
-      <div className="min-h-dvh max-w-300 mx-auto border-x border-border flex flex-col text-foreground font-sans pt-30">
+      </div> */}
+      <div className="min-h-dvh max-w-300 mx-auto flex flex-col text-foreground font-sans">
+        <div className="sticky top-2">
+          <BorderedCard>
+            <Header />
+          </BorderedCard>
+        </div>
         <Routes>
           <Route path="/" element={<div className="flex-1 flex justify-center items-center">Lander</div>} />
           <Route path="/analyze" element={<Analyze />} />

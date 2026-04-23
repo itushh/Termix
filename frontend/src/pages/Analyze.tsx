@@ -70,17 +70,18 @@ const Analyze = () => {
     }
 
     return (
-        <div className="p-4 md:p-8 flex flex-col gap-8 text-left max-w-7xl mx-auto w-full flex-1">
+        <div className="flex flex-col gap-8 text-left max-w-7xl mx-auto w-full flex-1">
             <div className="flex flex-col gap-8">
-                <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
+                {/* <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
                     <div className="flex flex-col gap-2">
                         <h1 className="text-3xl md:text-3xl font-bold tracking-tight text-foreground truncate">
                             {analysisData?.overview?.policy_title.value || (isStarted ? "Analyzing Document..." : "Analysis Results")}
                         </h1>
                     </div>
-                </div>
+                </div> */}
 
-                <div className="sticky top-18.25 z-40 bg-background/95 backdrop-blur-sm -mx-4 px-4 md:mx-0 md:px-0">
+                
+                <div className="sticky top-18.25 z-40 bg-background/95 backdrop-blur-sm px-5 mt-10">
                     <div className="flex border-b border-border gap-1 md:gap-4 overflow-x-auto scrollbar-hide overflow-y-hidden scroll-smooth">
                         {tabs.map((tab) => (
                             <button
@@ -103,7 +104,7 @@ const Analyze = () => {
                 {/* <div className="mt-2"> */}
                 <div>
                     {/* <div className="bg-card rounded-2xl border border-border shadow-sm overflow-hidden min-h-125"> */}
-                    <div>
+                    <div className='px-5'>
                         {renderTabContent()}
                     </div>
                 </div>

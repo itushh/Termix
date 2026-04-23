@@ -1,3 +1,5 @@
+import BorderedCard from "../BorderedCard";
+
 interface AmountSharingTabProps {
     data: {
         sum_insured: {
@@ -65,87 +67,93 @@ const AmountSharingTab = ({ data }: AmountSharingTabProps) => {
 
             {/* Cost Sharing */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div className={`p-8 rounded-4xl border-2 transition-all duration-300 ${data.cost_sharing.copayment.exists ? 'bg-destructive/5 border-destructive/20 shadow-sm' : 'bg-card border-border hover:border-muted-foreground/30'}`}>
-                    <div className="flex items-center gap-4 mb-6">
-                        <div className={`p-3 rounded-2xl ${data.cost_sharing.copayment.exists ? 'bg-destructive/10 text-destructive' : 'bg-muted text-muted-foreground'}`}>
-                            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z" />
-                            </svg>
-                        </div>
-                        <h4 className="font-bold text-foreground">Co-payment</h4>
-                    </div>
-                    {data.cost_sharing.copayment.exists ? (
-                        <div className="flex flex-col gap-3">
-                            <div className="text-4xl font-black text-destructive tracking-tighter">{data.cost_sharing.copayment.percentage}</div>
-                            <div className="p-4 bg-background/50 rounded-xl border border-destructive/10">
-                                <p className="text-xs text-foreground font-medium italic leading-relaxed">"{data.cost_sharing.copayment.condition}"</p>
+                <BorderedCard>
+                    <div className={`h-full p-8 rounded-4xl border-2 transition-all duration-300 ${data.cost_sharing.copayment.exists ? 'bg-destructive/5 border-destructive/20 shadow-sm' : 'bg-card border-border hover:border-muted-foreground/30'}`}>
+                        <div className="flex items-center gap-4 mb-6">
+                            <div className={`p-3 rounded-2xl ${data.cost_sharing.copayment.exists ? 'bg-destructive/10 text-destructive' : 'bg-muted text-muted-foreground'}`}>
+                                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z" />
+                                </svg>
                             </div>
+                            <h4 className="font-bold text-foreground">Co-payment</h4>
                         </div>
-                    ) : (
-                        <div className="text-muted-foreground text-sm font-medium bg-muted/30 p-4 rounded-xl text-center">No co-payment required.</div>
-                    )}
-                </div>
-                <div className={`p-8 rounded-4xl border-2 transition-all duration-300 ${data.cost_sharing.deductible.exists ? 'bg-destructive/5 border-destructive/20 shadow-sm' : 'bg-card border-border hover:border-muted-foreground/30'}`}>
-                    <div className="flex items-center gap-4 mb-6">
-                        <div className={`p-3 rounded-2xl ${data.cost_sharing.deductible.exists ? 'bg-destructive/10 text-destructive' : 'bg-muted text-muted-foreground'}`}>
-                            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
-                            </svg>
-                        </div>
-                        <h4 className="font-bold text-foreground">Deductible</h4>
+                        {data.cost_sharing.copayment.exists ? (
+                            <div className="flex flex-col gap-3">
+                                <div className="text-4xl font-black text-destructive tracking-tighter">{data.cost_sharing.copayment.percentage}</div>
+                                <div className="p-4 bg-background/50 rounded-xl border border-destructive/10">
+                                    <p className="text-xs text-foreground font-medium italic leading-relaxed">"{data.cost_sharing.copayment.condition}"</p>
+                                </div>
+                            </div>
+                        ) : (
+                            <div className="text-muted-foreground text-sm font-medium bg-muted/30 p-4 rounded-xl text-center">No co-payment required.</div>
+                        )}
                     </div>
-                    {data.cost_sharing.deductible.exists ? (
-                        <div className="flex flex-col gap-3">
-                            <div className="text-4xl font-black text-destructive tracking-tighter">{data.cost_sharing.deductible.amount}</div>
-                            <span className="text-[10px] font-black uppercase bg-destructive/10 text-destructive px-3 py-1 rounded-full self-start border border-destructive/10 tracking-widest">{data.cost_sharing.deductible.type}</span>
+                </BorderedCard>
+                <BorderedCard>
+                    <div className={`h-full p-8 rounded-4xl border-2 transition-all duration-300 ${data.cost_sharing.deductible.exists ? 'bg-destructive/5 border-destructive/20 shadow-sm' : 'bg-card border-border hover:border-muted-foreground/30'}`}>
+                        <div className="flex items-center gap-4 mb-6">
+                            <div className={`p-3 rounded-2xl ${data.cost_sharing.deductible.exists ? 'bg-destructive/10 text-destructive' : 'bg-muted text-muted-foreground'}`}>
+                                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                            </div>
+                            <h4 className="font-bold text-foreground">Deductible</h4>
                         </div>
-                    ) : (
-                        <div className="text-muted-foreground text-sm font-medium bg-muted/30 p-4 rounded-xl text-center">No deductible mentioned.</div>
-                    )}
-                </div>
+                        {data.cost_sharing.deductible.exists ? (
+                            <div className="flex flex-col gap-3">
+                                <div className="text-4xl font-black text-destructive tracking-tighter">{data.cost_sharing.deductible.amount}</div>
+                                <span className="text-[10px] font-black uppercase bg-destructive/10 text-destructive px-3 py-1 rounded-full self-start border border-destructive/10 tracking-widest">{data.cost_sharing.deductible.type}</span>
+                            </div>
+                        ) : (
+                            <div className="text-muted-foreground text-sm font-medium bg-muted/30 p-4 rounded-xl text-center">No deductible mentioned.</div>
+                        )}
+                    </div>
+                </BorderedCard>
             </div>
 
             {/* Sub-limits */}
-            <section className="bg-card border border-border rounded-4xl overflow-hidden shadow-sm">
-                <div className="p-6 md:p-8 border-b border-border bg-muted/10 flex justify-between items-center">
-                    <div className="flex items-center gap-4">
-                        <div className="p-3 rounded-2xl bg-primary text-primary-foreground shadow-lg shadow-primary/20">
-                            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                            </svg>
+            <BorderedCard>
+                <section className="bg-card border border-border rounded-4xl overflow-hidden shadow-sm">
+                    <div className="p-6 md:p-8 border-b border-border bg-muted/10 flex justify-between items-center">
+                        <div className="flex items-center gap-4">
+                            <div className="p-3 rounded-2xl bg-primary text-primary-foreground shadow-lg shadow-primary/20">
+                                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                            </div>
+                            <h3 className="text-xl font-bold text-foreground">Specific Limits & Sub-limits</h3>
                         </div>
-                        <h3 className="text-xl font-bold text-foreground">Specific Limits & Sub-limits</h3>
+                        {data.scoped_limits.has_sublimits && (
+                            <span className="px-4 py-1.5 bg-primary/10 text-primary rounded-full text-xs font-bold border border-primary/20 uppercase tracking-widest">{data.scoped_limits.scope.length} CATEGORIES</span>
+                        )}
                     </div>
-                    {data.scoped_limits.has_sublimits && (
-                        <span className="px-4 py-1.5 bg-primary/10 text-primary rounded-full text-xs font-bold border border-primary/20 uppercase tracking-widest">{data.scoped_limits.scope.length} CATEGORIES</span>
-                    )}
-                </div>
-                <div className="p-6 md:p-8">
-                    {!data.scoped_limits.has_sublimits ? (
-                        <div className="p-8 text-center bg-muted/20 rounded-2xl border border-dashed border-border group hover:bg-muted/30 transition-colors">
-                            <p className="text-muted-foreground italic font-medium">No specific sub-limits detected in the policy wording.</p>
-                        </div>
-                    ) : (
-                        <div className="grid grid-cols-1 gap-4">
-                            {data.scoped_limits.scope.map((item, i) => (
-                                <div key={i} className="group flex flex-col md:flex-row md:items-center justify-between p-6 bg-muted/10 border border-border rounded-2xl gap-6 hover:bg-background hover:border-primary/30 hover:shadow-md transition-all duration-300">
-                                    <div className="flex flex-col flex-1 gap-1">
-                                        <div className="flex items-center gap-3">
-                                            <span className="text-lg font-bold text-foreground">{item.category}</span>
-                                            <span className="text-[10px] uppercase font-bold text-primary/70 bg-primary/5 px-2 py-0.5 rounded border border-primary/10 tracking-widest">{item.limit_type}</span>
+                    <div className="p-6 md:p-8">
+                        {!data.scoped_limits.has_sublimits ? (
+                            <div className="p-8 text-center bg-muted/20 rounded-2xl border border-dashed border-border group hover:bg-muted/30 transition-colors">
+                                <p className="text-muted-foreground italic font-medium">No specific sub-limits detected in the policy wording.</p>
+                            </div>
+                        ) : (
+                            <div className="grid grid-cols-1 gap-4">
+                                {data.scoped_limits.scope.map((item, i) => (
+                                    <div key={i} className="group flex flex-col md:flex-row md:items-center justify-between p-6 bg-muted/10 border border-border rounded-2xl gap-6 hover:bg-background hover:border-primary/30 hover:shadow-md transition-all duration-300">
+                                        <div className="flex flex-col flex-1 gap-1">
+                                            <div className="flex items-center gap-3">
+                                                <span className="text-lg font-bold text-foreground">{item.category}</span>
+                                                <span className="text-[10px] uppercase font-bold text-primary/70 bg-primary/5 px-2 py-0.5 rounded border border-primary/10 tracking-widest">{item.limit_type}</span>
+                                            </div>
+                                            <p className="text-xs text-muted-foreground italic font-medium pl-4 border-l-2 border-primary/20 transition-all group-hover:border-primary">"{item.wording}"</p>
                                         </div>
-                                        <p className="text-xs text-muted-foreground italic font-medium pl-4 border-l-2 border-primary/20 transition-all group-hover:border-primary">"{item.wording}"</p>
+                                        <div className="flex flex-col items-end gap-1">
+                                            <span className="text-2xl font-black text-foreground drop-shadow-sm">{item.limit_value}</span>
+                                            <span className="text-[10px] font-bold text-muted-foreground uppercase opacity-0 group-hover:opacity-100 transition-opacity">MAXIMUM CAP</span>
+                                        </div>
                                     </div>
-                                    <div className="flex flex-col items-end gap-1">
-                                        <span className="text-2xl font-black text-foreground drop-shadow-sm">{item.limit_value}</span>
-                                        <span className="text-[10px] font-bold text-muted-foreground uppercase opacity-0 group-hover:opacity-100 transition-opacity">MAXIMUM CAP</span>
-                                    </div>
-                                </div>
-                            ))}
-                        </div>
-                    )}
-                </div>
-            </section>
+                                ))}
+                            </div>
+                        )}
+                    </div>
+                </section>
+            </BorderedCard>
         </div>
     )
 }
