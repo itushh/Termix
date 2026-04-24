@@ -26,7 +26,7 @@ const LandingPage = () => {
 
   return (
     <div 
-      className="relative w-full h-[calc(100vh-120px)] flex flex-col items-center justify-center overflow-hidden rounded-[2rem] mt-4 border border-white/10 bg-black/40 shadow-2xl"
+      className="relative w-full h-[calc(100vh-120px)] flex flex-col items-center justify-center overflow-hidden rounded-[2rem] mt-4 shadow-2xl"
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
       style={{ perspective: 1200 }}
