@@ -12,16 +12,16 @@ const RedFlagsTab = ({ data }: RedFlagsTabProps) => {
     return (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
             {/* Non-disclosure */}
-            <BorderedCard>
-                <div className="flex flex-col gap-6">
-                    <div className="flex items-center gap-4">
-                        <div className="w-12 h-12 rounded-2xl bg-destructive/10 flex items-center justify-center text-destructive shadow-sm">
-                            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
-                            </svg>
-                        </div>
-                        <h3 className="text-xl font-bold text-foreground">Non-Disclosure</h3>
+            <div className="flex flex-col gap-6">
+                <div className="flex items-center gap-4 px-5">
+                    <div className="w-12 h-12 rounded-2xl bg-destructive/10 flex items-center justify-center text-destructive shadow-sm">
+                        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                        </svg>
                     </div>
+                    <h3 className="text-xl font-bold text-foreground">Non-Disclosure</h3>
+                </div>
+                <BorderedCard className="flex-1 flex flex-col">
                     <div className="bg-destructive/5 border border-destructive/10 p-5 md:p-8 rounded-3xl md:rounded-4xl flex flex-col gap-6 flex-1 shadow-sm hover:border-destructive/30 transition-colors text-left">
                         <div>
                             <span className="text-[10px] font-bold text-destructive uppercase tracking-widest block mb-2">Look-back Period</span>
@@ -35,21 +35,21 @@ const RedFlagsTab = ({ data }: RedFlagsTabProps) => {
                             </div>
                         </div>
                     </div>
-                </div>
-            </BorderedCard>
+                </BorderedCard>
+            </div>
 
             {/* Material Facts */}
-            <BorderedCard>
-                <div className="flex flex-col gap-6">
-                    <div className="flex items-center gap-4">
-                        <div className="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center text-primary shadow-sm">
-                            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                            </svg>
-                        </div>
-                        <h3 className="text-xl font-bold text-foreground">Material Facts</h3>
+            <div className="flex flex-col gap-6">
+                <div className="flex items-center gap-4 px-5">
+                    <div className="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center text-primary shadow-sm">
+                        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                        </svg>
                     </div>
-                    <div className="bg-card border border-border p-5 md:p-8 rounded-3xl md:rounded-4xl flex flex-col gap-6 flex-1 shadow-sm group hover:border-primary/20 transition-colors text-left">
+                    <h3 className="text-xl font-bold text-foreground">Material Facts</h3>
+                </div>
+                <BorderedCard className="flex-1 flex flex-col">
+                    <div className="bg-card border border-border p-5 md:p-8 rounded-3xl md:rounded-4xl flex flex-col gap-6 flex-1 shadow-sm hover:border-primary/20 transition-colors text-left">
                         <div className="flex flex-col gap-4">
                             <span className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest block">What counts as "Material"</span>
                             <ul className="m-0 p-0 list-none flex flex-col gap-3">
@@ -66,20 +66,20 @@ const RedFlagsTab = ({ data }: RedFlagsTabProps) => {
                             <p className="text-sm text-destructive font-bold leading-tight">{data.material_facts.omission_consequence}</p>
                         </div>
                     </div>
-                </div>
-            </BorderedCard>
+                </BorderedCard>
+            </div>
 
             {/* Fraud Definition */}
-            <BorderedCard>
-                <div className="flex flex-col gap-6">
-                    <div className="flex items-center gap-4">
-                        <div className="w-12 h-12 rounded-2xl bg-destructive/10 flex items-center justify-center text-destructive shadow-sm">
-                            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
-                            </svg>
-                        </div>
-                        <h3 className="text-xl font-bold text-foreground">Fraud Clauses</h3>
+            <div className="flex flex-col gap-6">
+                <div className="flex items-center gap-4 px-5">
+                    <div className="w-12 h-12 rounded-2xl bg-destructive/10 flex items-center justify-center text-destructive shadow-sm">
+                        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                        </svg>
                     </div>
+                    <h3 className="text-xl font-bold text-foreground">Fraud Clauses</h3>
+                </div>
+                <BorderedCard className="flex-1 flex flex-col">
                     <div className="bg-card border border-border p-5 md:p-8 rounded-3xl md:rounded-4xl flex flex-col gap-6 flex-1 shadow-sm text-left">
                         <div className="flex flex-col gap-4 text-sm">
                             <span className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest block">Fraudulent Actions</span>
@@ -96,8 +96,8 @@ const RedFlagsTab = ({ data }: RedFlagsTabProps) => {
                             </div>
                         </div>
                     </div>
-                </div>
-            </BorderedCard>
+                </BorderedCard>
+            </div>
         </div>
     )
 }

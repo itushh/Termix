@@ -205,7 +205,7 @@ const OverviewTab = ({ data, streamingSummary }: OverviewTabProps) => {
                             <h4 className="font-bold text-foreground">Payments</h4>
                         </div>
                         <div className="flex flex-col gap-4 text-sm flex-1">
-                            <div className="flex justify-between items-center py-2 border-b border-border/50">
+                            <div className="flex flex-col justify-center gap-2 py-2 border-b border-border/50">
                                 <span className="text-muted-foreground font-medium">Frequency</span>
                                 {data ? (
                                     <span className="text-foreground font-bold">{data.installments.frequency}</span>

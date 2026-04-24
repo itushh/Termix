@@ -27,7 +27,6 @@ const WaitingPeriodTab = ({ data }: WaitingPeriodTabProps) => {
     return (
         <div className="flex flex-col gap-10 animate-in fade-in slide-in-from-bottom-4 duration-500">
             {/* Max Duration Banner */}
-            <BorderedCard>
                 <div className="bg-primary/5 border border-primary/10 p-6 md:p-10 rounded-3xl md:rounded-[2.5rem] flex flex-col items-center justify-center gap-4 text-center relative overflow-hidden group shadow-sm">
                     <div className="absolute top-0 left-0 w-full h-1 bg-linear-to-r from-transparent via-primary/30 to-transparent" />
                     <span className="text-xs font-bold uppercase tracking-[0.2em] text-primary">Standard Cooling-off Period</span>
@@ -35,7 +34,6 @@ const WaitingPeriodTab = ({ data }: WaitingPeriodTabProps) => {
                     <div className="h-1 w-12 bg-primary/20 rounded-full mt-2" />
                     <p className="text-muted-foreground text-sm font-medium max-w-sm mt-2 leading-relaxed">This is the general waiting period before most benefits become active under this policy.</p>
                 </div>
-            </BorderedCard>
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
                 {/* Unscoped (General Exclusions) */}

@@ -399,10 +399,12 @@ body {
     @apply border-border outline-ring/50;
 
   }
+
   body {
     @apply bg-background text-foreground;
 
   }
+
   html {
     @apply font-sans;
 
@@ -418,7 +420,18 @@ body {
   0% {
     transform: translateX(-100%);
   }
+
   100% {
     transform: translateX(100%);
+  }
+}
+
+.invert-in-light {
+  filter: invert(1);
+}
+
+@media (prefers-color-scheme: dark) {
+  .invert-in-light {
+    filter: none;
   }
 }
