@@ -28,8 +28,8 @@ const AmountSharingTab = ({ data }: AmountSharingTabProps) => {
         <div className="flex flex-col gap-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
             {/* Primary Amounts */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <BorderedCard>
-                    <div className="bg-green-500/5 border border-green-500/10 p-5 md:p-8 rounded-3xl md:rounded-4xl flex flex-col gap-4 relative overflow-hidden group shadow-sm text-left">
+                <BorderedCard className="flex flex-col">
+                    <div className="bg-green-500/5 border flex-1 border-green-500/10 p-5 md:p-8 rounded-3xl md:rounded-4xl flex flex-col gap-4 relative overflow-hidden group shadow-sm text-left">
                         <div className="absolute -top-12 -right-12 w-32 h-32 bg-green-500/10 rounded-full blur-3xl group-hover:bg-green-500/20 transition-all duration-700" />
                         <h3 className="text-xs font-bold uppercase tracking-widest text-green-600">Total Sum Insured</h3>
                         <div className="text-3xl md:text-5xl font-black text-foreground drop-shadow-sm">{data.sum_insured.base_amount}</div>
@@ -43,18 +43,18 @@ const AmountSharingTab = ({ data }: AmountSharingTabProps) => {
                         </div>
                     </div>
                 </BorderedCard>
-                <BorderedCard>
-                    <div className="bg-card border border-border p-5 md:p-8 rounded-3xl md:rounded-4xl flex flex-col justify-center gap-6 shadow-sm text-left">
+                <BorderedCard className="flex flex-col">
+                    <div className="bg-card flex-1 border border-border p-5 md:p-8 rounded-3xl md:rounded-4xl flex flex-col justify-center gap-6 shadow-sm text-left">
                         <div className="flex justify-between items-end">
                             <div className="flex flex-col gap-1">
                                 <span className="text-xs font-bold uppercase tracking-widest text-muted-foreground">Annual Limit</span>
                                 <span className="text-2xl font-bold text-foreground">{data.maximum_limits.overall_annual_limit}</span>
                             </div>
-                            <div className="p-3 rounded-2xl bg-muted/50">
+                            {/* <div className="p-3 rounded-2xl bg-muted/50">
                                 <svg className="w-6 h-6 text-muted-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                                 </svg>
-                            </div>
+                            </div> */}
                         </div>
                         {data.maximum_limits.lifetime_maximum.exists && (
                             <div className="flex items-center gap-4 pt-6 border-t border-border">
@@ -71,8 +71,8 @@ const AmountSharingTab = ({ data }: AmountSharingTabProps) => {
 
             {/* Cost Sharing */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <BorderedCard>
-                    <div className="w-full text-left">
+                <BorderedCard className="flex flex-col">
+                    <div className="w-full flex-1 text-left">
                         <div className={`h-full p-5 md:p-8 rounded-3xl md:rounded-4xl border-2 transition-all duration-300 ${data.cost_sharing.copayment.exists ? 'bg-destructive/5 border-destructive/20 shadow-sm' : 'bg-card border-border hover:border-muted-foreground/30'}`}>
                             <div className="flex items-center gap-4 mb-6">
                                 <div className={`p-3 rounded-2xl ${data.cost_sharing.copayment.exists ? 'bg-destructive/10 text-destructive' : 'bg-muted text-muted-foreground'}`}>
@@ -95,8 +95,8 @@ const AmountSharingTab = ({ data }: AmountSharingTabProps) => {
                         </div>
                     </div>
                 </BorderedCard>
-                <BorderedCard>
-                    <div className="w-full text-left">
+                <BorderedCard className="flex flex-col">
+                    <div className="w-full text-left flex-1">
                         <div className={`h-full p-5 md:p-8 rounded-3xl md:rounded-4xl border-2 transition-all duration-300 ${data.cost_sharing.deductible.exists ? 'bg-destructive/5 border-destructive/20 shadow-sm' : 'bg-card border-border hover:border-muted-foreground/30'}`}>
                             <div className="flex items-center gap-4 mb-6">
                                 <div className={`p-3 rounded-2xl ${data.cost_sharing.deductible.exists ? 'bg-destructive/10 text-destructive' : 'bg-muted text-muted-foreground'}`}>

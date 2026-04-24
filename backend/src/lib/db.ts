@@ -27,7 +27,7 @@ const connectDB = async (): Promise<void> => {
     } else {
       console.error("Database connection failed! Error: Unknown");
     }
-    process.exit(1);
+    // process.exit(1); // Do not exit, allow the app to run (maybe in mock mode)
   }
 };
 

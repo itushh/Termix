@@ -2,6 +2,8 @@ import type { Request, Response } from "express";
 import { PDFParse } from "pdf-parse";
 import { GoogleGenAI } from "@google/genai";
 import { Analysis } from "../models/Analysis.model.js";
+import { MOCK_ANALYSIS } from "../lib/mockData.js";
+import mongoose from "mongoose";
 
 export const analyzePolicy = async (req: Request, res: Response) => {
     try {
@@ -322,6 +324,13 @@ ${text}
 
 export const getPreAnalyzedPolicies = async (req: Request, res: Response) => {
     try {
+        if (mongoose.connection.readyState !== 1) {
+            console.warn("Database not connected, returning mock data");
+            return res.status(200).json([{
+                _id: MOCK_ANALYSIS._id,
+                title: MOCK_ANALYSIS.title
+            }]);
+        }
         const policies = await Analysis.find({}, "title _id");
         res.status(200).json(policies);
     } catch (error: any) {
@@ -331,6 +340,13 @@ export const getPreAnalyzedPolicies = async (req: Request, res: Response) => {
 
 export const getPreAnalyzedPolicyById = async (req: Request, res: Response) => {
     try {
+        if (mongoose.connection.readyState !== 1) {
+            console.warn("Database not connected, returning mock data");
+            if (req.params.id === MOCK_ANALYSIS._id) {
+                return res.status(200).json(MOCK_ANALYSIS);
+            }
+            return res.status(404).json({ message: "Policy not found (Mock Mode)" });
+        }
         const policy = await Analysis.findById(req.params.id);
         if (!policy) {
             return res.status(404).json({ message: "Policy not found" });
