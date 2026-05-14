@@ -1,6 +1,6 @@
-# AiTA
+# Termix
 
-AiTA : AI powered Terms and Condition Analyzer
+Termix : AI powered Terms and Condition Analyzer
 <br />
 cause' legal battles are played with wordings and not emotions!
 
@@ -9,11 +9,11 @@ cause' legal battles are played with wordings and not emotions!
 ### Installation Guide
 
 ```bash
-git clone https://github.com/itushh/aita.git
+git clone https://github.com/itushh/termix.git
 ```
 
 ```bash
-cd aita
+cd Termix
 ```
 <br />
 
@@ -37,7 +37,7 @@ npm run dev
 
 <br />
 
-Now run frontend (in new terminal)
+Now run frontend (new terminal)
 
 ```bash
 cd frontend
